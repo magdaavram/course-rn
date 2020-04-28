@@ -22,16 +22,16 @@ const ColorHandler = (props) => {
   };
 
   useEffect(() => {
-    props.getColor(color, props.color)
+    props.updateColor(color, props.title)
   }, [color]);
 
   return (
     <>
-      <Text style={styles.text}>{props.color}</Text>
+      <Text style={styles.text}>{props.title}</Text>
       <TouchableOpacity onPress={lightenColor}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>
-            Add {props.color}
+            Add {props.title}
           </Text>
         </View>
       </TouchableOpacity>
@@ -39,7 +39,7 @@ const ColorHandler = (props) => {
       <TouchableOpacity onPress={darkenColor}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>
-            Remove {props.color}
+            Remove {props.title}
           </Text>
         </View>
       </TouchableOpacity>
