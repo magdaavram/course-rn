@@ -5,6 +5,7 @@ import CounterScreenWrong from "./src/screens/StateCounterWrong";
 import UseStateScreen from "./src/screens/UseStateScreen";
 import ColorScreen from "./src/screens/ColorScreen";
 import CreateColor from "./src/screens/CreateColor";
+import ColorGame from "./src/screens/ColorGame";
 
 const navigator = createStackNavigator(
   {
@@ -12,7 +13,8 @@ const navigator = createStackNavigator(
     CounterScreenWrong: CounterScreenWrong,
     UseStateScreen: UseStateScreen,
     ColorScreen: ColorScreen,
-    CreateColor: CreateColor
+    CreateColor: CreateColor,
+    ColorGame: ColorGame,
   },
   {
     initialRouteName: "Home",

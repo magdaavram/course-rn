@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
+import { View, Button } from "react-native";
 import UseStateScreen from './UseStateScreen';
 
 const HomeScreen = ({ navigation }) => {
@@ -25,14 +25,12 @@ const HomeScreen = ({ navigation }) => {
         onPress={() => navigation.navigate("CreateColor")}
         title="Color Game"
       />
+      <Button
+        onPress={() => navigation.navigate("ColorGame")}
+        title="Color Game rebuilt"
+      />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
-  },
-});
 
 export default HomeScreen;
