@@ -1,29 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import Box from '../components/Box';
 import ColorHandler from "../components/ColorHandler";
 import { View } from 'react-native';
 
+const COLOR_INCREMENT = 15;
+const MIN = 0;
+const MAX = 255;
+
+const processColor = (state, action) => {
+  const { color, increment } = action;
+  const value = state[color] + increment;
+
+  if (value < MIN || value > MAX || color === undefined) {
+    return { ...state};
+  }
+
+  return { ...state, [color]: state[color] + increment};
+};
+
 const ColorGame = () => {
-  const red = 'Red';
-  const blue = 'Blue';
-  const green = 'Green';
-  const [rgb, setRgb] = useState('rgb(0, 0, 0)');
-  const [colors, setColors] = useState({[red]: 0, [green]: 0, [blue]: 0});
+  const red = 'red';
+  const blue = 'blue';
+  const green = 'green';
 
-  const updateColor = (value, color) => {
-    setColors(prevState => ({...prevState, [color]: value}));
-  };
-
-  useEffect(() => {
-    setRgb(`rgb(${colors[red]}, ${colors[green]}, ${colors[blue]})`);
-  }, [colors]);
+  const [color, setColor] = useReducer(processColor, {
+    [red]: MIN,
+    [green]: MIN,
+    [blue]: MIN,
+  });
 
   return (
     <View>
-      <ColorHandler title={red} updateColor={updateColor} />
-      <ColorHandler title={blue} updateColor={updateColor} />
-      <ColorHandler title={green} updateColor={updateColor} />
-      <Box color={{backgroundColor: rgb}} />
+      <ColorHandler
+        title={red}
+        updateColor={action => setColor(action)}
+        increment={COLOR_INCREMENT}
+      />
+
+      <ColorHandler
+        title={blue}
+        updateColor={action => setColor(action)}
+        increment={COLOR_INCREMENT}
+      />
+
+      <ColorHandler
+        title={green}
+        updateColor={action => setColor(action)}
+        increment={COLOR_INCREMENT}
+      />
+
+      <Box color={{ backgroundColor: `rgb(${color[red]}, ${color[green]}, ${color[blue]})` }} />
     </View>
   );
 };

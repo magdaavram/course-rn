@@ -1,45 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
-const ColorHandler = (props) => {
-  const COLOR_INCREMENT = 15;
-  const [color, setColor] = useState(0);
-
-  const lightenColor = () => {
-    if (color >= 255) {
-      setColor(255);
-    } else {
-      setColor(color + COLOR_INCREMENT);
-    }
-  };
-
-  const darkenColor = () => {
-    if (color <= 0) {
-      setColor(0);
-    } else {
-      setColor(color - COLOR_INCREMENT);
-    }
-  };
-
-  useEffect(() => {
-    props.updateColor(color, props.title)
-  }, [color]);
-
+const ColorHandler = ({ title, updateColor, increment }) => {
   return (
     <>
-      <Text style={styles.text}>{props.title}</Text>
-      <TouchableOpacity onPress={lightenColor}>
+      <Text style={styles.text}>{title}</Text>
+      <TouchableOpacity onPress={() => updateColor({ color: title, increment: increment })}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>
-            Add {props.title}
+            Add {title}
           </Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={darkenColor}>
+      <TouchableOpacity onPress={() => updateColor({ color: title, increment: -increment })}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>
-            Remove {props.title}
+            Remove {title}
           </Text>
         </View>
       </TouchableOpacity>
