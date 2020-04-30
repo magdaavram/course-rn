@@ -1,25 +1,20 @@
 import React from "react";
-import { View, StyleSheet, Button, Text } from "react-native";
+import { View, Button, Text } from "react-native";
 
-const ColorSampleMagda = ({ title, msgHandler, setColors }) => {
+const ColorSampleMagda = ({ title, increment, setColors }) => {
   return (
     <View>
       <Text>{title}</Text>
       <Button
         title={"Increment " + title}
-        onPress={() => {
-          setColors({ color: title, incrementDecrement: "increment" });
-        }}
-      ></Button>
+        onPress={() => setColors({ color: title, increment: increment })}
+      />
       <Button
         title={"Decrement " + title}
-        onPress={() => {
-          setColors({ color: title, incrementDecrement: "decrement" });
-        }}
-      ></Button>
+        onPress={() => setColors({ color: title, increment: -increment })}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
 export default ColorSampleMagda;

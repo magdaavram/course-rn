@@ -1,27 +1,15 @@
 import React, { useReducer } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import ColorSampleMagda from "./ColorSampleMagda";
 
 const COLOR_INCREMENT = 15;
 
-const processColor = (state, howToModify) => {
-  console.log();
-  switch (howToModify.color) {
-    case "red":
-      return howToModify.incrementDecrement === "increment"
-        ? { ...state, red: state.red + COLOR_INCREMENT }
-        : { ...state, red: state.red - COLOR_INCREMENT };
-    case "green":
-      return howToModify.incrementDecrement === "increment"
-        ? { ...state, green: state.green + COLOR_INCREMENT }
-        : { ...state, green: state.green - COLOR_INCREMENT };
-    case "blue":
-      return howToModify.incrementDecrement === "increment"
-        ? { ...state, blue: state.blue + COLOR_INCREMENT }
-        : { ...state, blue: state.blue - COLOR_INCREMENT };
-    default:
-      return state;
-  }
+const processColor = (state, action) => {
+  const { color, increment } = action;
+
+  return color === undefined ?
+    { ...state } :
+    { ...state, [color]: state[color] + increment }
 };
 
 const CreateColorMagda = () => {
@@ -32,23 +20,22 @@ const CreateColorMagda = () => {
     blue: 0,
   });
 
-  const handleMsg = (msg) => {
-    console.log("msg", msg);
-  };
-
   return (
     <View>
       <ColorSampleMagda
         title="red"
-        setColors={(propsTomodify) => setColor(propsTomodify)}
+        setColors={action => setColor(action)}
+        increment={COLOR_INCREMENT}
       />
       <ColorSampleMagda
         title="green"
-        setColors={(propsTomodify) => setColor(propsTomodify)}
+        setColors={action => setColor(action)}
+        increment={COLOR_INCREMENT}
       />
       <ColorSampleMagda
         title="blue"
-        setColors={(propsTomodify) => setColor(propsTomodify)}
+        setColors={action => setColor(action)}
+        increment={COLOR_INCREMENT}
       />
       <View
         style={{
@@ -63,5 +50,4 @@ const CreateColorMagda = () => {
   );
 };
 
-const styles = StyleSheet.create({});
 export default CreateColorMagda;
