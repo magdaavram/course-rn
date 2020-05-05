@@ -9,9 +9,9 @@ const MAX = 255;
 
 const processColor = (state, action) => {
   const { color, increment } = action;
-  const value = state[color] + increment;
+  const nextColor = state[color] + increment;
 
-  if (value < MIN || value > MAX || color === undefined) {
+  if (nextColor < MIN || nextColor > MAX || color === undefined) {
     return { ...state};
   }
 
